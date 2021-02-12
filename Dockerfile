@@ -15,7 +15,7 @@ LABEL maintainer="Felix Klauke <info@felix-klauke.de>"
 #################
 ### Arguments ###
 #################
-ARG PAPER_VERSION=1.16.3
+ARG PAPER_VERSION=1.16.5
 ARG PAPER_DOWNLOAD_URL=https://papermc.io/api/v1/paper/${PAPER_VERSION}/latest/download
 ARG MINECRAFT_BUILD_USER=minecraft-build
 ENV MINECRAFT_BUILD_PATH=/opt/minecraft
@@ -71,10 +71,9 @@ ENV PAPER_ARGS="nogui"
 #################
 ### Libraries ###
 #################
-ADD https://bootstrap.pypa.io/2.7/get-pip.py .
-RUN python get-pip.py
-
-RUN pip install mcstatus
+ADD https://bootstrap.pypa.io/get-pip.py .
+RUN apt update && apt install python3 python3-distutils -y && python3 get-pip.py
+RUN pip3 install mcstatus
 
 ###################
 ### Healthcheck ###
