@@ -15,7 +15,7 @@ LABEL maintainer="Felix Klauke <info@felix-klauke.de>"
 #################
 ### Arguments ###
 #################
-ARG PAPER_VERSION=1.16.1
+ARG PAPER_VERSION=1.16.3
 ARG PAPER_DOWNLOAD_URL=https://papermc.io/api/v1/paper/${PAPER_VERSION}/latest/download
 ARG MINECRAFT_BUILD_USER=minecraft-build
 ENV MINECRAFT_BUILD_PATH=/opt/minecraft
@@ -62,15 +62,16 @@ ENV CONFIG_PATH=${MINECRAFT_PATH}/config
 ENV WORLDS_PATH=${MINECRAFT_PATH}/worlds
 ENV PLUGINS_PATH=${MINECRAFT_PATH}/plugins
 ENV PROPERTIES_LOCATION=${CONFIG_PATH}/server.properties
+ENV JAVA_OPT=""
 ENV JAVA_HEAP_SIZE=4G
-ENV JAVA_ARGS="-server -Dcom.mojang.eula.agree=true"
+ENV EULA_ARGS="-Dcom.mojang.eula.agree=true"
 ENV SPIGOT_ARGS="--nojline"
-ENV PAPER_ARGS=""
+ENV PAPER_ARGS="nogui"
 
 #################
 ### Libraries ###
 #################
-ADD https://bootstrap.pypa.io/get-pip.py .
+ADD https://bootstrap.pypa.io/2.7/get-pip.py .
 RUN python get-pip.py
 
 RUN pip install mcstatus
